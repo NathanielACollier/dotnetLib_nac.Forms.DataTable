@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nac.Forms.DataTable", "nac.Forms.DataTable\nac.Forms.DataTable.csproj", "{57A33403-706B-4AE6-B860-546566EAAB59}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nac.Forms.Table", "nac.Forms.Table\nac.Forms.Table.csproj", "{57A33403-706B-4AE6-B860-546566EAAB59}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{E54E91C0-CBFF-4469-A5CA-01C1E651B109}"
 EndProject
