@@ -5,6 +5,10 @@
         <RootNamespace>nac.Forms</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>Provides the ability to display a table of data</Description>
+        <PackageProjectUrl>https://github.com/NathanielACollier/dotnetLib_nac.Forms.Table</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/NathanielACollier/dotnetLib_nac.Forms.Table</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
