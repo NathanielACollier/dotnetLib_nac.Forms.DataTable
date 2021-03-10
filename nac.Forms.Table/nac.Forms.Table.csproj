@@ -3,6 +3,8 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>nac.Forms</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Description>Provides the ability to display a table of data</Description>
     </PropertyGroup>
 
     <ItemGroup>
