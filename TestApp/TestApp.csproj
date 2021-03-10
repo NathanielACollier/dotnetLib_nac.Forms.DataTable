@@ -6,7 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="nac.Forms" Version="1.0.10" />
+      <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.10.0" />
+      <PackageReference Include="nac.Forms" Version="1.0.11" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\nac.Forms.Table\nac.Forms.Table.csproj" />
     </ItemGroup>
 
 </Project>

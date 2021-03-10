@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using nac.Forms;
 
 namespace TestApp.lib
@@ -8,7 +9,23 @@ namespace TestApp.lib
         {
             parentForm.DisplayChildForm(f =>
             {
+
+                var people = new ObservableCollection<model.Person>
+                {
+                    new model.Person
+                    {
+                        First = "George",
+                        Last = "Washington"
+                    },
+                    new model.Person
+                    {
+                        First = "John",
+                        Last = "Adams"
+                    }
+                };
+                f.Model["persons"] = people;
                 
+                f.Table<ObservableCollection<model.Person>>("persons");
             });
         }
         
