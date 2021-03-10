@@ -22,8 +22,13 @@ namespace TestApp
             {
                 new model.TestEntry
                 {
-                    Name = "Test DataTable: Display Observable Collection",
-                    CodeToRun = lib.TestFunctions.TestDataTable_DisplayObservableCollection
+                    Name = "Test Table: Display Observable Collection",
+                    CodeToRun = lib.TestFunctions.TestTable_DisplayObservableCollection
+                },
+                new model.TestEntry
+                {
+                    Name = "Test Table: Display 2 Tables",
+                    CodeToRun = lib.TestFunctions.TestTable_Display2Tables
                 }
             };
             f.SimpleDropDown(methods, (i) => {
