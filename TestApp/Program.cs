@@ -44,6 +44,11 @@ namespace TestApp
                 {
                     Name = "Test Table: Display Observable Collection of Bindable Dictionary",
                     CodeToRun = lib.TestFunctions.TestTable_ObservableCollectionBindableDictionary
+                },
+                new model.TestEntry
+                {
+                    Name = "Test Table: Basic Specified Column Binding",
+                    CodeToRun = lib.TestFunctions.TestTable_BasicSpecifiedColumnBinding
                 }
                 
             };

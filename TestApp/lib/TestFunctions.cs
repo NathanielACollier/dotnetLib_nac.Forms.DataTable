@@ -168,5 +168,37 @@ namespace TestApp.lib
 
             });
         }
+
+        public static void TestTable_BasicSpecifiedColumnBinding(Form parentForm)
+        {
+            var list = new ObservableCollection<model.Alphabet>();
+            
+            parentForm.DisplayChildForm(f =>
+            {
+                f.Model["list"] = list;
+
+                f.HorizontalGroup(hg =>
+                    {
+                        hg.Text("X")
+                            .TextBoxFor("X");
+                    })
+                    .Button("Add", (args) =>
+                    {
+                        var newItem = new model.Alphabet();
+                        newItem.X = f.Model["X"] as string;
+                        list.Add(newItem);
+                    })
+                    .Table<ObservableCollection<Dictionary<string, object>>>("list",
+                        columns: new[]
+                        {
+                            new Column
+                            {
+                                Header = "X",
+                                modelBindingPropertyName = "X"
+                            }
+                        });
+
+            });
+        }
     }
 }
