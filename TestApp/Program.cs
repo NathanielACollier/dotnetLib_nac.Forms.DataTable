@@ -34,6 +34,11 @@ namespace TestApp
                 {
                     Name = "Test Table: Add entry to blank list",
                     CodeToRun = lib.TestFunctions.TestTable_AddEntryToBlankList
+                },
+                new model.TestEntry
+                {
+                    Name = "Test Table: Observable Collection of Dictionary",
+                    CodeToRun = lib.TestFunctions.TestTable_ObservableCollectionOfDictionary
                 }
             };
             f.SimpleDropDown(methods, (i) => {

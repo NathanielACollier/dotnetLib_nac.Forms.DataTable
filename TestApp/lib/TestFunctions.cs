@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using nac.Forms;
 using TestApp.model;
@@ -106,6 +107,31 @@ namespace TestApp.lib
                     }).Table<ObservableCollection<model.Person>>("people");
                 });
 
+
+            });
+        }
+
+        public static void TestTable_ObservableCollectionOfDictionary(Form parentForm)
+        {
+            var list = new ObservableCollection<Dictionary<string, object>>();
+            
+            parentForm.DisplayChildForm(f =>
+            {
+                f.Model["list"] = list;
+
+                f.HorizontalGroup(hg =>
+                    {
+                        hg.Text("First Name")
+                            .TextBoxFor("firstName");
+                    })
+                    .Button("Add", (args) =>
+                    {
+                        list.Add(new Dictionary<string, object>
+                        {
+                            {"First Name", f.Model["firstName"] as string}
+                        });
+                    })
+                    .Table<ObservableCollection<Dictionary<string, object>>>("list");
 
             });
         }
