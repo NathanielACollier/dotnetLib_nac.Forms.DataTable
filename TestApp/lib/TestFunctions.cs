@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using nac.Forms;
+using nac.Forms.model;
 using TestApp.model;
 
 namespace TestApp.lib
@@ -132,6 +133,38 @@ namespace TestApp.lib
                         });
                     })
                     .Table<ObservableCollection<Dictionary<string, object>>>("list");
+
+            });
+        }
+
+        public static void TestTable_ObservableCollectionBindableDictionary(Form parentForm)
+        {
+            var list = new ObservableCollection<nac.Forms.lib.BindableDynamicDictionary>();
+            
+            parentForm.DisplayChildForm(f =>
+            {
+                f.Model["list"] = list;
+
+                f.HorizontalGroup(hg =>
+                    {
+                        hg.Text("First Name")
+                            .TextBoxFor("firstName");
+                    })
+                    .Button("Add", (args) =>
+                    {
+                        dynamic newItem = new nac.Forms.lib.BindableDynamicDictionary();
+                        newItem.firstName = f.Model["firstName"] as string;
+                        list.Add(newItem);
+                    })
+                    .Table<ObservableCollection<Dictionary<string, object>>>("list",
+                        columns: new[]
+                        {
+                            new Column
+                            {
+                                Header = "First Name",
+                                modelBindingPropertyName = "firstName"
+                            }
+                        });
 
             });
         }

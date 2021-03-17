@@ -39,7 +39,13 @@ namespace TestApp
                 {
                     Name = "Test Table: Observable Collection of Dictionary",
                     CodeToRun = lib.TestFunctions.TestTable_ObservableCollectionOfDictionary
+                },
+                new model.TestEntry
+                {
+                    Name = "Test Table: Display Observable Collection of Bindable Dictionary",
+                    CodeToRun = lib.TestFunctions.TestTable_ObservableCollectionBindableDictionary
                 }
+                
             };
             f.SimpleDropDown(methods, (i) => {
                 try

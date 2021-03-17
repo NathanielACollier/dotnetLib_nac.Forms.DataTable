@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
+using Avalonia.Data;
 using Avalonia.Markup.Xaml.Styling;
 
 namespace nac.Forms
@@ -9,7 +11,9 @@ namespace nac.Forms
     {
 
         public static Form Table<T>(this Form f,
-                                string itemsModelFieldName)
+                                string itemsModelFieldName,
+                                IEnumerable<model.Column> columns = null,
+                                bool autoGenerateColumns = true)
         {
             f._Extend_AccessApp(app =>
             {
@@ -20,7 +24,24 @@ namespace nac.Forms
             });
             
             var dg = new Avalonia.Controls.DataGrid();
-            dg.AutoGenerateColumns = true;
+            dg.AutoGenerateColumns = autoGenerateColumns;
+
+            if (columns != null)
+            {
+                foreach (var c in columns)
+                {
+                    if (c.template == null)
+                    {
+                        var dgCol = new Avalonia.Controls.DataGridTextColumn();
+                        dgCol.Header = c.Header;
+                        dgCol.Binding = new Binding
+                        {
+                            Path = c.modelBindingPropertyName
+                        };
+                        dg.Columns.Add(dgCol);
+                    }
+                }
+            }
             
             f._Extend_AddBinding<T>(itemsModelFieldName, dg, Avalonia.Controls.DataGrid.ItemsProperty, 
                 isTwoWayDataBinding: true);
