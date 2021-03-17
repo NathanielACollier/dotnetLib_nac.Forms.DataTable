@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using nac.Forms;
+using TestApp.model;
 
 namespace TestApp.lib
 {
@@ -71,12 +72,42 @@ namespace TestApp.lib
                 });
             });
         }
-        
-        
-        
-        
-        
-        
-        
+
+
+        public static void TestTable_AddEntryToBlankList(Form parentForm)
+        {
+            var people = new ObservableCollection<model.Person>();
+            parentForm.DisplayChildForm(f =>
+            {
+                f.Model["people"] = people;
+                f.Text("Person Editor")
+                .VerticalGroupSplit(vg =>
+                {
+                    vg.VerticalGroup(newEntryEditor =>
+                    {
+                        newEntryEditor.HorizontalGroup(hg =>
+                            {
+                                hg.Text("First Name")
+                                    .TextBoxFor("firstName");
+                            })
+                            .HorizontalGroup(hg =>
+                            {
+                                hg.Text("Last Name")
+                                    .TextBoxFor("lastName");
+                            })
+                            .Button("Add", (args) =>
+                            {
+                                people.Add(new Person
+                                {
+                                    First = f.Model["firstName"] as string,
+                                    Last = f.Model["lastName"] as string
+                                });
+                            });
+                    }).Table<ObservableCollection<model.Person>>("people");
+                });
+
+
+            });
+        }
     }
 }

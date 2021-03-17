@@ -29,6 +29,11 @@ namespace TestApp
                 {
                     Name = "Test Table: Display 2 Tables",
                     CodeToRun = lib.TestFunctions.TestTable_Display2Tables
+                },
+                new model.TestEntry
+                {
+                    Name = "Test Table: Add entry to blank list",
+                    CodeToRun = lib.TestFunctions.TestTable_AddEntryToBlankList
                 }
             };
             f.SimpleDropDown(methods, (i) => {
