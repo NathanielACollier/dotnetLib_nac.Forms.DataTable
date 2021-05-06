@@ -67,11 +67,11 @@ namespace TestApp.lib
             {
                 f.Model["p1"] = p1;
                 f.Model["p2"] = p2;
-                f.VerticalGroupSplit(vg =>
+                f.VerticalGroup( vg =>
                 {
                     vg.Table<ObservableCollection<model.Person>>("p1")
                         .Table<ObservableCollection<model.Person>>("p2");
-                });
+                }, isSplit:true);
             });
         }
 
@@ -83,7 +83,7 @@ namespace TestApp.lib
             {
                 f.Model["people"] = people;
                 f.Text("Person Editor")
-                .VerticalGroupSplit(vg =>
+                .VerticalGroup(vg =>
                 {
                     vg.VerticalGroup(newEntryEditor =>
                     {
@@ -106,7 +106,7 @@ namespace TestApp.lib
                                 });
                             });
                     }).Table<ObservableCollection<model.Person>>("people");
-                });
+                }, isSplit:true);
 
 
             });

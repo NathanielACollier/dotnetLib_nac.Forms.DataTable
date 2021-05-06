@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Avalonia;
+using Avalonia.Logging;
 using nac.Forms;
 
 namespace TestApp
@@ -9,7 +11,10 @@ namespace TestApp
         static void Main(string[] args)
         {
             var f = Avalonia.AppBuilder.Configure<App>()
-                                .NewForm();
+                                .NewForm(beforeAppBuilderInit: (appBUilder) =>
+                                {
+                                    appBUilder.LogToTrace(LogEventLevel.Debug);
+                                });
 
             mainUI(f);
         }
