@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
+using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml.Styling;
 
@@ -39,6 +40,34 @@ namespace nac.Forms
                             Path = c.modelBindingPropertyName
                         };
                         dg.Columns.Add(dgCol);
+                    }
+                    else
+                    {
+                        var col = new Avalonia.Controls.DataGridTemplateColumn();
+                        col.Header = c.Header;
+                        col.CellTemplate = new FuncDataTemplate<object>((itemModel, nameScope) =>
+                        {
+                            nac.Forms.Form rowForm = null;
+                            f._Extend_AccessApp(app =>
+                            {
+                                rowForm = new Form(__app: app, _model: new lib.BindableDynamicDictionary());
+                            });
+                            
+                            // this has to have a unique model
+                            rowForm.Model[nac.Forms.model.SpecialModelKeys.DataContext] = itemModel;
+                            c.template(rowForm);
+
+                            // get access to host via extend
+                            Avalonia.Controls.Grid host = null;
+                            f._Extend_AccessHost(_host =>
+                            {
+                                host = _host;
+                                host.DataContext = itemModel;
+                            });
+
+                            return host;
+                        });
+                        dg.Columns.Add(col);
                     }
                 }
             }

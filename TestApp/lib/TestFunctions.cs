@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using nac.Forms;
@@ -193,11 +194,48 @@ namespace TestApp.lib
                         {
                             new Column
                             {
-                                Header = "X",
+                                Header = "Duplicate of X",
                                 modelBindingPropertyName = "X"
                             }
                         });
 
+            });
+        }
+
+        public static void TestTable_BasicTemplateColumn_ButtonCounter(Form parentForm)
+        {
+            var list = new ObservableCollection<model.Alphabet>();
+            parentForm.DisplayChildForm(f =>
+            {
+                f.Model["list"] = list;
+                f.HorizontalStack(hs =>
+                {
+                    hs.Text("Use this to add an item to the list: ")
+                        .Button("Add Item", (_args) =>
+                        {
+                            var newItem = new model.Alphabet();
+                            newItem.A = DateTime.Now.ToString();
+                            list.Add(newItem);
+                        });
+                }).Table<model.Alphabet>(itemsModelFieldName: "list", columns: new[]
+                {
+                    new Column
+                    {
+                        Header = "My Counter",
+                        template = (myColTemplate) =>
+                        {
+                            myColTemplate.Button("Incriment", (_args) =>
+                            {
+                                var model =
+                                    myColTemplate.Model[nac.Forms.model.SpecialModelKeys.DataContext] as model.Alphabet;
+
+                                var counter = string.IsNullOrWhiteSpace(model.C) ? 0 : Convert.ToInt32(model.C);
+                                ++counter;
+                                model.C = counter.ToString();
+                            });
+                        }
+                    }
+                });
             });
         }
     }

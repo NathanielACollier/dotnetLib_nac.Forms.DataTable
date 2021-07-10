@@ -54,6 +54,11 @@ namespace TestApp
                 {
                     Name = "Test Table: Basic Specified Column Binding",
                     CodeToRun = lib.TestFunctions.TestTable_BasicSpecifiedColumnBinding
+                },
+                new model.TestEntry()
+                {
+                    Name = "Test Table: Basic Template Column (Button Counter)",
+                    CodeToRun = lib.TestFunctions.TestTable_BasicTemplateColumn_ButtonCounter
                 }
                 
             };
