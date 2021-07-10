@@ -4,6 +4,7 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
+using Avalonia.Layout;
 using Avalonia.Markup.Xaml.Styling;
 
 namespace nac.Forms
@@ -59,7 +60,7 @@ namespace nac.Forms
 
                             // get access to host via extend
                             Avalonia.Controls.Grid host = null;
-                            f._Extend_AccessHost(_host =>
+                            rowForm._Extend_AccessHost(_host =>
                             {
                                 host = _host;
                                 host.DataContext = itemModel;
