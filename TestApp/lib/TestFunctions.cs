@@ -207,6 +207,8 @@ namespace TestApp.lib
             var list = new ObservableCollection<model.Alphabet>();
             parentForm.DisplayChildForm(f =>
             {
+                f.DebugAvalonia(); // enable this child form to be debugged
+                
                 f.Model["list"] = list;
                 f.HorizontalStack(hs =>
                 {
@@ -215,6 +217,7 @@ namespace TestApp.lib
                         {
                             var newItem = new model.Alphabet();
                             newItem.A = DateTime.Now.ToString();
+                            newItem.C = "0";
                             list.Add(newItem);
                         });
                 }).Table<model.Alphabet>(itemsModelFieldName: "list", columns: new[]
