@@ -156,7 +156,7 @@ namespace TestApp.lib
                         newItem.firstName = f.Model["firstName"] as string;
                         list.Add(newItem);
                     })
-                    .Table<Dictionary<string, object>>("list",
+                    .Table<nac.Forms.lib.BindableDynamicDictionary>("list",
                         columns: new[]
                         {
                             new Column
@@ -188,7 +188,7 @@ namespace TestApp.lib
                         newItem.X = f.Model["X"] as string;
                         list.Add(newItem);
                     })
-                    .Table<Dictionary<string, object>>("list",
+                    .Table<model.Alphabet>("list",
                         columns: new[]
                         {
                             new Column
