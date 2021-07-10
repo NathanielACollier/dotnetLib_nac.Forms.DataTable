@@ -42,8 +42,14 @@ namespace nac.Forms
                     }
                 }
             }
+
+            if (!(f.Model[itemsModelFieldName] is IEnumerable<T>))
+            {
+                throw new Exception(
+                    $"Model Items source property specified by name [{itemsModelFieldName}] must be IEnumerable<T>");
+            }
             
-            f._Extend_AddBinding<T>(itemsModelFieldName, dg, Avalonia.Controls.DataGrid.ItemsProperty, 
+            f._Extend_AddBinding<IEnumerable<T>>(itemsModelFieldName, dg, Avalonia.Controls.DataGrid.ItemsProperty, 
                 isTwoWayDataBinding: true);
             f._Extend_AddRowToHost(dg, rowAutoHeight: false);
 

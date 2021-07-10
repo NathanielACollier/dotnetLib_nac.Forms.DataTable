@@ -28,7 +28,7 @@ namespace TestApp.lib
                 };
                 f.Model["persons"] = people;
                 
-                f.Table<ObservableCollection<model.Person>>("persons");
+                f.Table<model.Person>("persons");
             });
         }
 
@@ -69,8 +69,8 @@ namespace TestApp.lib
                 f.Model["p2"] = p2;
                 f.VerticalGroup( vg =>
                 {
-                    vg.Table<ObservableCollection<model.Person>>("p1")
-                        .Table<ObservableCollection<model.Person>>("p2");
+                    vg.Table<model.Person>("p1")
+                        .Table<model.Person>("p2");
                 }, isSplit:true);
             });
         }
@@ -105,7 +105,7 @@ namespace TestApp.lib
                                     Last = f.Model["lastName"] as string
                                 });
                             });
-                    }).Table<ObservableCollection<model.Person>>("people");
+                    }).Table<model.Person>("people");
                 }, isSplit:true);
 
 
@@ -132,7 +132,7 @@ namespace TestApp.lib
                             {"First Name", f.Model["firstName"] as string}
                         });
                     })
-                    .Table<ObservableCollection<Dictionary<string, object>>>("list");
+                    .Table<Dictionary<string, object>>("list");
 
             });
         }
@@ -156,7 +156,7 @@ namespace TestApp.lib
                         newItem.firstName = f.Model["firstName"] as string;
                         list.Add(newItem);
                     })
-                    .Table<ObservableCollection<Dictionary<string, object>>>("list",
+                    .Table<Dictionary<string, object>>("list",
                         columns: new[]
                         {
                             new Column
@@ -188,7 +188,7 @@ namespace TestApp.lib
                         newItem.X = f.Model["X"] as string;
                         list.Add(newItem);
                     })
-                    .Table<ObservableCollection<Dictionary<string, object>>>("list",
+                    .Table<Dictionary<string, object>>("list",
                         columns: new[]
                         {
                             new Column
