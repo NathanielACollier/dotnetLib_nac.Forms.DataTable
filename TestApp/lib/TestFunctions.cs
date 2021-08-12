@@ -218,6 +218,7 @@ namespace TestApp.lib
                             var newItem = new model.Alphabet();
                             newItem.A = DateTime.Now.ToString();
                             newItem.C = "0";
+                            newItem.G = "77"; // model is working if initially set
                             list.Add(newItem);
                         });
                 }).Table<model.Alphabet>(itemsModelFieldName: "list", columns: new[]
@@ -236,6 +237,14 @@ namespace TestApp.lib
                                 ++counter;
                                 model.C = counter.ToString();
                             });
+                        }
+                    },
+                    new Column
+                    {
+                        Header = "C (Dupe)",
+                        template = (myColTemplate) =>
+                        {
+                            myColTemplate.TextFor("C");
                         }
                     }
                 });
