@@ -146,6 +146,10 @@ namespace TestApp.lib
             {
                 f.Model["list"] = list;
 
+                var firstItem = new nac.Forms.lib.BindableDynamicDictionary();
+                firstItem["firstName"] = "Apple";
+                list.Add(firstItem);
+
                 f.HorizontalGroup(hg =>
                     {
                         hg.Text("First Name")
@@ -249,6 +253,45 @@ namespace TestApp.lib
                     }
                 });
             });
+        }
+
+        public static void TestTable_DataContext_Test(Form parentForm)
+        {
+            parentForm.DisplayChildForm(f =>
+            {
+                var model = new model.TestDataContextWindowModel();
+                f.Model[nac.Forms.model.SpecialModelKeys.DataContext] = model;
+
+                f.Text("Letters")
+                    .HorizontalGroup(h =>
+                    {
+                        h.Text("A: ")
+                            .TextBoxFor("NewLetter.A");
+                    })
+                    .HorizontalGroup(h =>
+                    {
+                        h.Text("B: ")
+                            .TextBoxFor("NewLetter.B");
+                    })
+                    .Button("Add", (obj) =>
+                    {
+                        model.Letters.Add(model.NewLetter);
+                        model.NewLetter = new model.Alphabet();
+                    })
+                    .Table<model.Alphabet>(itemsModelFieldName: "Letters", columns: new[]
+                    {
+                        new nac.Forms.model.Column
+                        {
+                            Header = "A",
+                            modelBindingPropertyName = "A"
+                        },
+                        new nac.Forms.model.Column
+                        {
+                            Header = "B",
+                            modelBindingPropertyName = "B"
+                        }
+                    }, autoGenerateColumns: false);
+            }, useIsolatedModelForThisChildForm: true);
         }
     }
 }

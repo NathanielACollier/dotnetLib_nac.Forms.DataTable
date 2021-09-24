@@ -6,6 +6,8 @@ using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml.Styling;
+using nac.Forms.lib;
+using nac.Forms.model;
 
 namespace nac.Forms
 {
@@ -27,6 +29,18 @@ namespace nac.Forms
             
             var dg = new Avalonia.Controls.DataGrid();
             dg.AutoGenerateColumns = autoGenerateColumns;
+            
+            // special case for the columns in our special dictionary
+            if ( autoGenerateColumns == true && f.getModelValue(itemsModelFieldName) is IEnumerable<nac.Forms.lib.BindableDynamicDictionary> dictList)
+            {
+                dg.AutoGenerateColumns = false; // we are going to generate our own columns
+                var newColumns = new List<model.Column>();
+                newColumns.AddRange(
+                    generateColumnsForBindableDynamicDictionary(dictList)
+                    );
+                newColumns.AddRange(columns);
+                columns = newColumns;
+            }
 
             if (columns != null)
             {
@@ -73,7 +87,7 @@ namespace nac.Forms
                 }
             }
 
-            if (!(f.Model[itemsModelFieldName] is IEnumerable<T>))
+            if (!(f.getModelValue(itemsModelFieldName) is IEnumerable<T>))
             {
                 throw new Exception(
                     $"Model Items source property specified by name [{itemsModelFieldName}] must be IEnumerable<T>");
@@ -84,6 +98,30 @@ namespace nac.Forms
             f._Extend_AddRowToHost(dg, rowAutoHeight: false);
 
             return f;
+        }
+
+        private static IEnumerable<model.Column> generateColumnsForBindableDynamicDictionary(IEnumerable<BindableDynamicDictionary> dictList)
+        {
+            var dictColumns = new List<model.Column>();
+
+            var firstDict = dictList.FirstOrDefault();
+
+            if (firstDict == null)
+            {
+                throw new Exception(
+                    "If using BindableDynamicDictionary for the type of the list items, you start with 1 item in the list, because there is no other way to figure out the type");
+            }
+
+            foreach (var key in firstDict.GetDynamicMemberNames())
+            {
+                dictColumns.Add(new model.Column
+                {
+                    Header = key,
+                    modelBindingPropertyName = key
+                });
+            }
+
+            return dictColumns;
         }
 
         private static void addDataGridStyleToApp(Application app)

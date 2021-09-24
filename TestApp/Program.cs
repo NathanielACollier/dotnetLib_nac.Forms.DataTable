@@ -60,6 +60,11 @@ namespace TestApp
                 {
                     Name = "Test Table: Basic Template Column (Button Counter)",
                     CodeToRun = lib.TestFunctions.TestTable_BasicTemplateColumn_ButtonCounter
+                },
+                new model.TestEntry
+                {
+                    Name = "Test Table: DataContext Test",
+                    CodeToRun = lib.TestFunctions.TestTable_DataContext_Test
                 }
                 
             };
