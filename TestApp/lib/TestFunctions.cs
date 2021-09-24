@@ -146,6 +146,10 @@ namespace TestApp.lib
             {
                 f.Model["list"] = list;
 
+                var firstItem = new nac.Forms.lib.BindableDynamicDictionary();
+                firstItem["firstName"] = "Apple";
+                list.Add(firstItem);
+
                 f.HorizontalGroup(hg =>
                     {
                         hg.Text("First Name")

@@ -104,6 +104,23 @@ namespace nac.Forms
         {
             var dictColumns = new List<model.Column>();
 
+            var firstDict = dictList.FirstOrDefault();
+
+            if (firstDict == null)
+            {
+                throw new Exception(
+                    "If using BindableDynamicDictionary for the type of the list items, you start with 1 item in the list, because there is no other way to figure out the type");
+            }
+
+            foreach (var key in firstDict.GetDynamicMemberNames())
+            {
+                dictColumns.Add(new model.Column
+                {
+                    Header = key,
+                    modelBindingPropertyName = key
+                });
+            }
+
             return dictColumns;
         }
 
