@@ -31,7 +31,7 @@ namespace nac.Forms
             dg.AutoGenerateColumns = autoGenerateColumns;
             
             // special case for the columns in our special dictionary
-            if ( autoGenerateColumns == true && f.Model[itemsModelFieldName] is IEnumerable<nac.Forms.lib.BindableDynamicDictionary> dictList)
+            if ( autoGenerateColumns == true && f.getModelValue(itemsModelFieldName) is IEnumerable<nac.Forms.lib.BindableDynamicDictionary> dictList)
             {
                 dg.AutoGenerateColumns = false; // we are going to generate our own columns
                 var newColumns = new List<model.Column>();
@@ -87,7 +87,7 @@ namespace nac.Forms
                 }
             }
 
-            if (!(f.Model[itemsModelFieldName] is IEnumerable<T>))
+            if (!(f.getModelValue(itemsModelFieldName) is IEnumerable<T>))
             {
                 throw new Exception(
                     $"Model Items source property specified by name [{itemsModelFieldName}] must be IEnumerable<T>");
