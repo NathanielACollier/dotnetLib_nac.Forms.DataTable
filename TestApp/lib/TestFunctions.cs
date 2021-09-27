@@ -341,8 +341,24 @@ namespace TestApp.lib
                     },
                     new nac.Forms.model.Column
                     {
+                        Header  = "A (Template)",
+                        template = r =>
+                        {
+                            r.TextFor("A");
+                        }
+                    },
+                    new nac.Forms.model.Column
+                    {
                         Header = "B",
                         modelBindingPropertyName = "B"
+                    },
+                    new nac.Forms.model.Column
+                    {
+                        Header = "B (Template)",
+                        template = r =>
+                        {
+                            r.TextFor("B");
+                        }
                     }
                 }, autoGenerateColumns: false);
             }, useIsolatedModelForThisChildForm: true);

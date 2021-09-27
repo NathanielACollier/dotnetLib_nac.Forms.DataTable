@@ -14,6 +14,28 @@ namespace nac.Forms
     public static class Extensions
     {
 
+        private static Form createNewFormWithIsolatedModel(Form parentForm)
+        {
+            nac.Forms.Form rowForm = null;
+            parentForm._Extend_AccessApp(app =>
+            {
+                rowForm = new Form(__app: app, _model: new lib.BindableDynamicDictionary());
+            });
+            return rowForm;
+        }
+
+        private static Avalonia.Controls.Grid getFormHost(Form rowForm)
+        {
+            // get access to host via extend
+            Avalonia.Controls.Grid host = null;
+            rowForm._Extend_AccessHost(_host =>
+            {
+                host = _host;
+            });
+
+            return host;
+        }
+        
         public static Form Table<T>(this Form f,
                                 string itemsModelFieldName,
                                 IEnumerable<model.Column> columns = null,
@@ -62,24 +84,13 @@ namespace nac.Forms
                         col.Header = c.Header;
                         col.CellTemplate = new FuncDataTemplate<object>((itemModel, nameScope) =>
                         {
-                            nac.Forms.Form rowForm = null;
-                            f._Extend_AccessApp(app =>
-                            {
-                                rowForm = new Form(__app: app, _model: new lib.BindableDynamicDictionary());
-                            });
+                            var rowForm = createNewFormWithIsolatedModel(f);
                             
                             // this has to have a unique model
-                            rowForm.Model[nac.Forms.model.SpecialModelKeys.DataContext] = itemModel;
+                            rowForm.DataContext = itemModel;
                             c.template(rowForm);
 
-                            // get access to host via extend
-                            Avalonia.Controls.Grid host = null;
-                            rowForm._Extend_AccessHost(_host =>
-                            {
-                                host = _host;
-                                host.DataContext = itemModel;
-                            });
-
+                            var host = getFormHost(rowForm);
                             return host;
                         });
                         dg.Columns.Add(col);
