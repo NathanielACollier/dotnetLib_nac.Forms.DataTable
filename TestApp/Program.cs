@@ -65,6 +65,11 @@ namespace TestApp
                 {
                     Name = "Test Table: DataContext Test",
                     CodeToRun = lib.TestFunctions.TestTable_DataContext_Test
+                },
+                new model.TestEntry
+                {
+                    Name = "Test Table: Filtering table results",
+                    CodeToRun = lib.TestFunctions.TestTable_FilterTableResults
                 }
                 
             };

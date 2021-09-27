@@ -292,5 +292,60 @@ namespace TestApp.lib
                     }, autoGenerateColumns: false);
             }, useIsolatedModelForThisChildForm: true);
         }
+
+        public static void TestTable_FilterTableResults(Form parentForm)
+        {
+            parentForm.DisplayChildForm(f =>
+            {
+                var model = new model.TestDataContextWindowModel();
+                f.DataContext = model;
+                
+                model.refreshLettersWithRandomData();
+
+                f.HorizontalGroup(h =>
+                {
+                    h.Button("randomize", (obj) =>
+                        {
+                            model.refreshLettersWithRandomData();
+                        })
+                        .Button("Filter", (obj) =>
+                        {
+                            model.applyFilter();
+                        })
+                        .TextBoxFor("Filter");
+                })
+                .Text("Output")
+                .TextBoxFor("OutputText", multiline: true, style: new nac.Forms.model.Style{height = 50})
+                .Table<model.Alphabet>(itemsModelFieldName: "Letters", columns: new[]
+                {
+                    new nac.Forms.model.Column
+                    {
+                        Header  = "",
+                        template = myColTemplate =>
+                        {
+                            myColTemplate.Button("Set", (obj) =>
+                            {
+                                var l = myColTemplate.DataContext as model.Alphabet;
+
+                                model.OutputText = $@"
+                                    A: {l.A}
+                                    B: {l.B}
+                                ";
+                            });
+                        }
+                    },
+                    new nac.Forms.model.Column
+                    {
+                        Header = "A",
+                        modelBindingPropertyName = "A"
+                    },
+                    new nac.Forms.model.Column
+                    {
+                        Header = "B",
+                        modelBindingPropertyName = "B"
+                    }
+                }, autoGenerateColumns: false);
+            }, useIsolatedModelForThisChildForm: true);
+        }
     }
 }
