@@ -234,8 +234,7 @@ namespace TestApp.lib
                         {
                             myColTemplate.Button("Incriment", (_args) =>
                             {
-                                var model =
-                                    myColTemplate.Model[nac.Forms.model.SpecialModelKeys.DataContext] as model.Alphabet;
+                                var model = myColTemplate.DataContext as model.Alphabet;
 
                                 var counter = string.IsNullOrWhiteSpace(model.C) ? 0 : Convert.ToInt32(model.C);
                                 ++counter;
@@ -260,7 +259,7 @@ namespace TestApp.lib
             parentForm.DisplayChildForm(f =>
             {
                 var model = new model.TestDataContextWindowModel();
-                f.Model[nac.Forms.model.SpecialModelKeys.DataContext] = model;
+                f.DataContext = model;
 
                 f.Text("Letters")
                     .HorizontalGroup(h =>
