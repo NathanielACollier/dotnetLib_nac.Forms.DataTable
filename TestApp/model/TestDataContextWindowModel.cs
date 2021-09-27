@@ -38,6 +38,7 @@ namespace TestApp.model
         {
             this.Letters = new ObservableCollection<Alphabet>();
             this.NewLetter = new model.Alphabet();
+            this.Filter = "";
         }
 
 
