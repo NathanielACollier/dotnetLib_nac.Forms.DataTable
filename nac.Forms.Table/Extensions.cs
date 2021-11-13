@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
@@ -104,7 +105,7 @@ namespace nac.Forms
                     $"Model Items source property specified by name [{itemsModelFieldName}] must be IEnumerable<T>");
             }
             
-            f._Extend_AddBinding<IEnumerable<T>>(itemsModelFieldName, dg, Avalonia.Controls.DataGrid.ItemsProperty, 
+            f._Extend_AddBinding<IEnumerable>(itemsModelFieldName, dg, Avalonia.Controls.DataGrid.ItemsProperty, 
                 isTwoWayDataBinding: true);
             f._Extend_AddRowToHost(dg, rowAutoHeight: false);
 
